@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hero_animation/radial.dart';
 
 class Util{
   static const String COFFFE_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1200px-A_small_cup_of_coffee.JPG';
@@ -28,6 +29,45 @@ class Util{
         fit: BoxFit.cover,
         ),
       )
+    );
+  }
+
+  static Widget buildHeroRadialIcon(String path, String tag, double minRadius, double maxRadius){
+    return Container(
+      child: Hero(
+        tag: tag,
+        createRectTween: _createTween,
+        child: Container(
+          height: minRadius,
+          width: minRadius,
+          child: RadialTransition(
+            maxRadius: maxRadius, 
+            child: Image.network(path, fit: BoxFit.cover),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Tween<Rect?>_createTween(Rect? begin, Rect? end){
+    return MaterialRectArcTween(begin: begin, end: end);
+  }
+
+  static Widget buildHeroRadialDestination(String path, String tag, double maxWidth, double maxHeight, VoidCallback pop){
+    return GestureDetector(
+      child: Hero(
+        createRectTween: _createTween,
+        tag: tag,
+        child: Container(
+          height: maxHeight,
+          width: maxWidth,
+          child: RadialTransition(
+            maxRadius: maxWidth/2,
+            child: Image.network(path, fit: BoxFit.cover),
+          ),
+        ),
+      ),
+      onTap: pop,
     );
   }
 }

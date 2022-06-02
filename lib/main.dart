@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, prefer_const_declarations
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hero_animation/details.dart';
@@ -29,6 +29,8 @@ class HeroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double maxRadius = MediaQuery.of(context).size.width;
+    final double minRadius = 80.0;
     return Scaffold(
       appBar: AppBar(
         title: Text('Hero Animations',
@@ -41,15 +43,15 @@ class HeroPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             GestureDetector(
-              child: Util.buildHeroIcon(Util.COFFFE_URL, 'coffee'),
+              child: Util.buildHeroRadialIcon(Util.COFFFE_URL, 'coffee', minRadius, maxRadius),
               onTap: (){changeRoute(context, 'coffee');},
             ),
             GestureDetector(
-              child: Util.buildHeroIcon(Util.CAPPUCCINO_URL, 'cappuccino'),
+              child: Util.buildHeroRadialIcon(Util.CAPPUCCINO_URL, 'cappuccino', minRadius, maxRadius),
               onTap: (){changeRoute(context, 'cappuccino');},
             ),
             GestureDetector(
-              child: Util.buildHeroIcon(Util.TEA_URL, 'tea'),
+              child: Util.buildHeroRadialIcon(Util.TEA_URL, 'tea', minRadius, maxRadius),
               onTap: (){changeRoute(context, 'tea');},
             ),
           ],
